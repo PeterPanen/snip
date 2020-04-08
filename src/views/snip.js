@@ -10,20 +10,26 @@ module.exports = (source) => `
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
   <script>hljs.initHighlightingOnLoad(); hljs.initLineNumbersOnLoad();</script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body, pre {
+      height: 100%;
+    }
     body {
       margin: 0;
       padding: 0;
-      background-color: #232327;
+      background-color: #23241f;
     }
     code {
-      height: 100vh;
       color: white;
       margin: 0;
       padding: 0 !important;
+      display: inline-block !important;
     }
     pre {
       margin: 0;
-      padding: 0;
+      padding: 12px;
     }
     .hljs-ln-numbers {
       -webkit-touch-callout: none;

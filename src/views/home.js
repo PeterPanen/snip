@@ -52,7 +52,7 @@ module.exports = `
   <div class="App">
     <form method="POST" action="/save">
       <div class="content">
-        <textarea name="source">Hello</textarea>
+        <textarea placeholder="Paste code here..." name="source"></textarea>
         <input type="submit" value="Save" />
       </div>
     </form>
