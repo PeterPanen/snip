@@ -47,9 +47,6 @@ module.exports = `
 <body>
   <div class="App">
     <form method="POST" action="/save">
-      <select name="language">
-        <option value="javascript">JavaScript</option>
-      </select>
       <div class="content">
         <textarea name="source">Hello</textarea>
         <input type="submit" value="Save" />
