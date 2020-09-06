@@ -6,6 +6,9 @@ const htmlEscapes = {
   "'": "&#39",
 };
 
+const reUnescapedHtml = /[&<>"']/g;
+const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
+
 function escape(string) {
   return string && reHasUnescapedHtml.test(string)
     ? string.replace(reUnescapedHtml, (chr) => htmlEscapes[chr])
