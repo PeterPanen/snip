@@ -1,3 +1,17 @@
+const htmlEscapes = {
+  "&": "&amp",
+  "<": "&lt",
+  ">": "&gt",
+  '"': "&quot",
+  "'": "&#39",
+};
+
+function escape(string) {
+  return string && reHasUnescapedHtml.test(string)
+    ? string.replace(reUnescapedHtml, (chr) => htmlEscapes[chr])
+    : string;
+}
+
 module.exports = (source) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +67,7 @@ module.exports = (source) => `
   </style>
 </head>
 <body>
-  <pre><code>${source}</code></pre>
+  <pre><code>${escape(source)}</code></pre>
 </body>
 </html>
 `;
