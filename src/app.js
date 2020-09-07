@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Datastore = require("nedb-promises");
 const shortid = require("shortid");
+const pjson = require("../package.json");
 const homeView = require("./views/home");
 const snipView = require("./views/snip");
 
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/public", express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send(homeView);
+  res.send(homeView(pjson.version));
 });
 
 app.get("/:sid", async (req, res, next) => {

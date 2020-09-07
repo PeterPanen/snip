@@ -1,10 +1,10 @@
-module.exports = `
+module.exports = (version) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snip</title>
+  <title>Snip v${version}</title>
   <style>
     body {
       margin: 0;
