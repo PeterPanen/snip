@@ -4,6 +4,8 @@ module.exports = (version) => `
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="og:title" content="Snippets <3">
+  <meta name="og:image" content="http://snip.panen.ga/public/logo.png">
   <title>Snip v${version}</title>
   <style>
     body {
