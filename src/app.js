@@ -11,6 +11,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/public", express.static("public"));
 
 app.get("/", (req, res) => {
   res.send(homeView);
@@ -21,7 +22,7 @@ app.get("/:sid", async (req, res, next) => {
   if (!sid) return next();
   const snip = await datastore.findOne({ sid });
   if (snip) {
-    return res.send(snipView(snip.source));
+    return res.send(snipView(snip.source, sid));
   }
   return next();
 });
@@ -39,4 +40,6 @@ app.post("/save", async (req, res) => {
   res.redirect(`/${sid}`);
 });
 
-app.listen(PORT, () => console.log(`Now listening for connections on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Now listening for connections on port ${PORT}`)
+);

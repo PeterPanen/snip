@@ -15,12 +15,14 @@ function escape(string) {
     : string;
 }
 
-module.exports = (source) => `
+module.exports = (source, sid) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="Codesnippet ${escape(sid)}">
+  <meta name="image" content="http://snip.panen.ga/public/logo.png">
   <title>Snip</title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
