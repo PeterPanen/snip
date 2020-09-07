@@ -31,6 +31,7 @@ app.get("/:sid", async (req, res, next) => {
 app.post("/save", async (req, res) => {
   const { language, source } = req.body;
   const sid = shortid.generate();
+  console.log(sid);
 
   await datastore.insert({
     sid,
