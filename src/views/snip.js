@@ -15,15 +15,15 @@ function escape(string) {
     : string;
 }
 
-module.exports = (source, sid) => `
+module.exports = (source, sid, version) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="og:title" content="Codesnippet ${escape(sid)}">
-  <meta name="og:image" content="http://snip.panen.ga/public/logo.png">
-  <title>Snip</title>
+  <meta name="og:image" content="http://snip.panen.ga/logo.png">
+  <title>Snippets 💗</title>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
@@ -39,6 +39,9 @@ module.exports = (source, sid) => `
       margin: 0;
       padding: 0;
       background-color: #23241f;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     code {
       color: white;
@@ -49,6 +52,7 @@ module.exports = (source, sid) => `
     pre {
       margin: 0;
       padding: 12px;
+      overflow: auto;
     }
     .hljs-ln-numbers {
       -webkit-touch-callout: none;
@@ -69,10 +73,38 @@ module.exports = (source, sid) => `
     .hljs-ln-code {
       padding-left: 5px !important;
     }
+    .toolbar {
+      font-family: Arial;
+      font-size: 11px;
+      color: #ddd;
+      background-color: #202020;
+      padding: 2px;
+      border-bottom: 1px solid #171717;
+   
+    }
+    .green {
+      color: #70ff70;
+    }
+    .orange {
+      color: #ff9f4a;
+    }
+    .toolbar .item {
+      border-left: 1px solid #333;
+      padding-left: 16px;
+    }
+    .toolbar .item:first-child {
+      padding-left: 4px;
+      padding-right: 16px;
+      border-left: 0;
+    }
   </style>
 </head>
 <body>
+  <div class="toolbar"><span class="item">Version: <span class="orange">${version}</span></span> <span class="item">Syntax: <span id="languageText" class="green"></span></span></div>
   <pre><code>${escape(source)}</code></pre>
+  <script type="text/javascript">
+    window.onload = e => document.getElementById("languageText").textContent = document.getElementsByClassName("hljs")[0].classList[1];
+  </script>
 </body>
 </html>
 `;
