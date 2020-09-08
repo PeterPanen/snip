@@ -23,20 +23,21 @@ app.get("/:sid", async (req, res, next) => {
   if (!sid) return next();
   const snip = await datastore.findOne({ sid });
   if (snip) {
-    return res.send(snipView(snip.source, sid, pjson.version));
+    return res.send(snipView(snip.source, sid, pjson.version, snip.theme, snip.syntax));
   }
   return next();
 });
 
 app.post("/save", async (req, res) => {
-  const { language, source } = req.body;
+  const { source, syntax, theme } = req.body;
   const sid = shortid.generate();
   console.log(sid);
 
   await datastore.insert({
     sid,
-    language,
     source,
+    syntax,
+    theme,
   });
 
   res.redirect(`/${sid}`);

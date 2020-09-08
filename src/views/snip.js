@@ -15,7 +15,7 @@ function escape(string) {
     : string;
 }
 
-module.exports = (source, sid, version) => `
+module.exports = (source, sid, version, theme, syntax) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +24,8 @@ module.exports = (source, sid, version) => `
   <meta name="og:title" content="Codesnippet ${escape(sid)}">
   <meta name="og:image" content="http://snip.panen.ga/logo.png">
   <title>Snippets 💗</title>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai-sublime.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/${theme}.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
   <script>hljs.initHighlightingOnLoad(); hljs.initLineNumbersOnLoad();</script>
   <style>
@@ -101,9 +101,14 @@ module.exports = (source, sid, version) => `
 </head>
 <body>
   <div class="toolbar"><span class="item">Version: <span class="orange">${version}</span></span> <span class="item">Syntax: <span id="languageText" class="green"></span></span></div>
-  <pre><code>${escape(source)}</code></pre>
+  <pre><code ${syntax === "auto" ? "" : `class="${syntax}"`}>${escape(source)}</code></pre>
   <script type="text/javascript">
-    window.onload = e => document.getElementById("languageText").textContent = document.getElementsByClassName("hljs")[0].classList[1];
+    window.onload = e => {
+      const classes = document.getElementsByClassName("hljs")[0].classList;
+      const filteredClasses = Array.prototype.filter.call(classes, c => c !== "hljs")[0];
+      document.getElementById("languageText").textContent = filteredClasses;
+      document.body.style.backgroundColor = getComputedStyle(document.getElementsByTagName("code")[0]).backgroundColor;
+    }
   </script>
 </body>
 </html>
