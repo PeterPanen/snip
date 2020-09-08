@@ -100,7 +100,11 @@ module.exports = (source, sid, version, theme, syntax) => `
   </style>
 </head>
 <body>
-  <div class="toolbar"><span class="item">Version: <span class="orange">${version}</span></span> <span class="item">Syntax: <span id="languageText" class="green"></span></span></div>
+  <div class="toolbar">
+    <span class="item">Version: <span class="orange">${version}</span></span>
+    <span class="item">Syntax: <span id="languageText" class="green"></span></span>
+    <span class="item">Theme: <span id="themeText" class="green">${theme}</span></span>
+  </div>
   <pre><code ${syntax === "auto" ? "" : `class="${syntax}"`}>${escape(source)}</code></pre>
   <script type="text/javascript">
     window.onload = e => {
