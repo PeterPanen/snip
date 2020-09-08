@@ -91,11 +91,14 @@ module.exports = (source, sid, version, theme, syntax) => `
     .toolbar .item {
       border-left: 1px solid #333;
       padding-left: 16px;
+      padding-right: 16px;
     }
     .toolbar .item:first-child {
       padding-left: 4px;
-      padding-right: 16px;
       border-left: 0;
+    }
+    .toolbar .item:last-child {
+      padding-right: 0;
     }
   </style>
 </head>
